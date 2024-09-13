@@ -1,15 +1,15 @@
-from typing import List, Optional
+import datetime
+
 from pydantic import BaseModel
-from datetime import datetime
 
 
 class Status(BaseModel):
-    timestamp: datetime
+    timestamp: datetime.datetime
     error_code: int
-    error_message: Optional[str]
+    error_message: str | None
     elapsed: int
     credit_count: int
-    notice: Optional[str]
+    notice: str | None
 
 
 class Platform(BaseModel):
@@ -33,8 +33,8 @@ class Quote(BaseModel):
     market_cap: float
     market_cap_dominance: float
     fully_diluted_market_cap: float
-    tvl: Optional[float]
-    last_updated: datetime
+    tvl: float | None
+    last_updated: datetime.datetime
 
 
 class CryptocurrencyData(BaseModel):
@@ -43,20 +43,20 @@ class CryptocurrencyData(BaseModel):
     symbol: str
     slug: str
     num_market_pairs: int
-    date_added: datetime
-    tags: List[str]
-    max_supply: Optional[float]
+    date_added: datetime.datetime
+    tags: list[str]
+    max_supply: float | None
     circulating_supply: float
     total_supply: float
-    platform: Optional[Platform]
+    platform: Platform | None
     is_active: int
     infinite_supply: bool
     cmc_rank: int
     is_fiat: int
-    self_reported_circulating_supply: Optional[float]
-    self_reported_market_cap: Optional[float]
-    tvl_ratio: Optional[float]
-    last_updated: datetime
+    self_reported_circulating_supply: float | None
+    self_reported_market_cap: float | None
+    tvl_ratio: float | None
+    last_updated: datetime.datetime
     quote: dict[str, Quote]
 
 
