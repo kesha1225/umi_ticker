@@ -43,7 +43,6 @@ class CoinMarketCupExchange(AbstractExchange):
         )
 
     async def get_price(self, currency_from: Currency, currency_to: Currency) -> float:
-        print(f"hello {currency_from} -> {currency_to}")
         return (
             (
                 await self.get_currency_from_to_data(
