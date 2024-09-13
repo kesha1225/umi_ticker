@@ -1,10 +1,15 @@
 import os
+import typing
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-CMC_API_KEY = os.environ.get("CMC_API_KEY")
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
+def get_env_value(key: str) -> str | typing.NoReturn:
+    return os.environ[key]
+
+
+CMC_API_KEY: str = get_env_value("CMC_API_KEY")
+BOT_TOKEN: str = get_env_value("BOT_TOKEN")
 GROUP_ID = -1001743072181

@@ -7,7 +7,7 @@ from ticker.models.sigen.exchange import ExchangeResponse
 from ticker.models.sigen.p2p import P2POffer, P2POffers
 
 
-def get_currency_symbol(currency: FiatCurrency | CryptoCurrency) -> str:
+def get_fiat_currency_symbol(currency: FiatCurrency) -> str:
     return {FiatCurrency.rub: "₽"}[currency]
 
 
@@ -31,7 +31,7 @@ def get_p2p_text(
     if not prices:
         return "Нет данных"
 
-    fiat_symbol = get_currency_symbol(currency=fiat_currency)
+    fiat_symbol = get_fiat_currency_symbol(currency=fiat_currency)
     return f"{prices[0]}{fiat_symbol} - {prices[-1]}{fiat_symbol}"
 
 
@@ -76,7 +76,7 @@ def get_crypto_to_rub_text(
     intermediary_crypto: CryptoCurrency,
     crypto_to_intermediary_rate: float,
     intermediary_to_rub_rate: float,
-    real_currency_for_text: str | None = None
+    real_currency_for_text: str | None = None,
 ) -> str:
     price = convert_crypto_to_rub(
         crypto_to_intermediary_rate=crypto_to_intermediary_rate,
@@ -162,7 +162,7 @@ def get_umi_usdt_ton_to_rub_exchange_text(
             pair=SigenExchangePair.UMI_USDTON
         ),
         intermediary_to_rub_rate=usdt_rub_price,
-        real_currency_for_text=CryptoCurrency.ton_usdt
+        real_currency_for_text=CryptoCurrency.ton_usdt,
     )
 
 
