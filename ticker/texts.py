@@ -89,7 +89,7 @@ def get_crypto_to_rub_text(
 
 def get_rod_btc_to_rub_exchange_text(
     exchange_data: ExchangeResponse, btc_rub_price: float
-):
+) -> str:
     return get_crypto_to_rub_text(
         crypto_from=CryptoCurrency.rod,
         intermediary_crypto=CryptoCurrency.btc,
@@ -102,7 +102,7 @@ def get_rod_btc_to_rub_exchange_text(
 
 def get_rod_usdt_to_rub_exchange_text(
     exchange_data: ExchangeResponse, usdt_rub_price: float
-):
+) -> str:
     return get_crypto_to_rub_text(
         crypto_from=CryptoCurrency.rod,
         intermediary_crypto=CryptoCurrency.usdt,
@@ -115,7 +115,7 @@ def get_rod_usdt_to_rub_exchange_text(
 
 def get_umi_btc_to_rub_exchange_text(
     exchange_data: ExchangeResponse, btc_rub_price: float
-):
+) -> str:
     return get_crypto_to_rub_text(
         crypto_from=CryptoCurrency.umi,
         intermediary_crypto=CryptoCurrency.btc,
@@ -128,7 +128,7 @@ def get_umi_btc_to_rub_exchange_text(
 
 def get_umi_usdt_to_rub_exchange_text(
     exchange_data: ExchangeResponse, usdt_rub_price: float
-):
+) -> str:
     return get_crypto_to_rub_text(
         crypto_from=CryptoCurrency.umi,
         intermediary_crypto=CryptoCurrency.usdt,
@@ -141,7 +141,7 @@ def get_umi_usdt_to_rub_exchange_text(
 
 def get_umi_ton_to_rub_exchange_text(
     exchange_data: ExchangeResponse, ton_rub_price: float
-):
+) -> str:
     return get_crypto_to_rub_text(
         crypto_from=CryptoCurrency.umi,
         intermediary_crypto=CryptoCurrency.ton,
@@ -154,7 +154,7 @@ def get_umi_ton_to_rub_exchange_text(
 
 def get_umi_usdt_ton_to_rub_exchange_text(
     exchange_data: ExchangeResponse, usdt_rub_price: float
-):
+) -> str:
     return get_crypto_to_rub_text(
         crypto_from=CryptoCurrency.umi,
         intermediary_crypto=CryptoCurrency.ton,

@@ -12,7 +12,7 @@ from ticker.texts import create_post_text
 from ticker_config import GROUP_ID, BOT_TOKEN
 
 
-async def notify_forever():
+async def notify_forever() -> None:
     bot = aiogram.Bot(BOT_TOKEN)
 
     session = aiohttp.ClientSession()
