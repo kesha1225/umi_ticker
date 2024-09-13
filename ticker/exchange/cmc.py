@@ -3,33 +3,19 @@ from aiocache import cached
 
 from ticker.constants import CMC_PRICE_CACHE_TIME
 from ticker.enum import Currency
-from ticker.exchange.abc import AbstractExchange
+from ticker.exchange.base import BaseExchange
 from ticker.models.cmc.exchange import CoinMarketCapExchangeResponse
 from ticker_config import CMC_API_KEY
 
 
-class CoinMarketCupExchange(AbstractExchange):
+class CoinMarketCupExchange(BaseExchange):
     def __init__(self, session: aiohttp.ClientSession):
-        self.session = session
-        self.base_path = "https://pro-api.coinmarketcap.com"
+        super().__init__(session=session, base_path="https://pro-api.coinmarketcap.com")
         self.session.headers.update(
             {
                 "X-CMC_PRO_API_KEY": CMC_API_KEY,
             }
         )
-
-    async def request(
-        self,
-        method: str,
-        path: str,
-        params: dict | None = None,
-        data: dict | str | None = None,
-    ) -> dict:
-        response = await self.session.request(
-            method=method, url=f"{self.base_path}{path}", params=params, json=data
-        )
-        json_response = await response.json()
-        return json_response
 
     async def get_currency_from_to_data(
         self, currency_from: Currency, currency_to: Currency
@@ -61,6 +47,3 @@ class CoinMarketCupExchange(AbstractExchange):
         return await self.get_price(
             currency_from=currency_from, currency_to=currency_to
         )
-
-    async def close(self) -> None:
-        await self.session.close()
