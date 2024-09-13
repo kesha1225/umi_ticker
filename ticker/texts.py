@@ -76,12 +76,15 @@ def get_crypto_to_rub_text(
     intermediary_crypto: CryptoCurrency,
     crypto_to_intermediary_rate: float,
     intermediary_to_rub_rate: float,
+    real_currency_for_text: str | None = None
 ) -> str:
     price = convert_crypto_to_rub(
         crypto_to_intermediary_rate=crypto_to_intermediary_rate,
         intermediary_to_rub_rate=intermediary_to_rub_rate,
     )
-    return f"1 {crypto_from} = {price}₽ (за {intermediary_crypto})"
+
+    currency_for_text = real_currency_for_text or intermediary_crypto
+    return f"1 {crypto_from} = {price}₽ (за {currency_for_text})"
 
 
 def get_rod_btc_to_rub_exchange_text(
@@ -159,6 +162,7 @@ def get_umi_usdt_ton_to_rub_exchange_text(
             pair=SigenExchangePair.UMI_USDTON
         ),
         intermediary_to_rub_rate=usdt_rub_price,
+        real_currency_for_text=CryptoCurrency.ton_usdt
     )
 
 
