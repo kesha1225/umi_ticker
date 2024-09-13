@@ -22,8 +22,6 @@ class AbstractExchange(ABC):
 
 
 class BaseExchange(AbstractExchange, ABC):
-    base_path: str
-
     def __init__(self, session: aiohttp.ClientSession, base_path: str):
         self.session = session
         self.base_path = base_path
