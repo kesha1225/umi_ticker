@@ -31,7 +31,7 @@ async def notify_forever() -> None:
 
 
 if __name__ == "__main__":
-    _log_format = f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s"
+    _log_format = "%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s"
     logging.basicConfig(filename="log.txt", format=_log_format, level="INFO")
 
     loop = asyncio.new_event_loop()
