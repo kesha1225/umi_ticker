@@ -84,7 +84,7 @@ def get_crypto_to_rub_text(
     )
 
     currency_for_text = real_currency_for_text or intermediary_crypto
-    return f"1 {crypto_from} = {price}₽ (за {currency_for_text})"
+    return f"1 {crypto_from} = {price:,.2f}₽ (за {currency_for_text})"
 
 
 def get_rod_btc_to_rub_exchange_text(
