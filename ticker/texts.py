@@ -32,7 +32,7 @@ def get_p2p_text(
         return "Нет данных"
 
     fiat_symbol = get_fiat_currency_symbol(currency=fiat_currency)
-    return f"{prices[0]}{fiat_symbol} - {prices[-1]}{fiat_symbol}"
+    return f"{prices[0]:,.2f}{fiat_symbol} - {prices[-1]:,.2f}{fiat_symbol}"
 
 
 def get_rod_p2p_buy_text(p2p_data: P2POffers) -> str:
