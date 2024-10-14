@@ -2,3 +2,4 @@ aiogram==3.13.0
 aiohttp==3.10.5
 python-dotenv==1.0.1
 aiocache==0.12.2
+asyncpg==0.29.0

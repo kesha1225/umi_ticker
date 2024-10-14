@@ -5,6 +5,8 @@ from ticker.exchange.cmc import CoinMarketCupExchange
 from ticker.exchange.sigen import SigenExchange
 from ticker.models.sigen.exchange import ExchangeResponse
 from ticker.models.sigen.p2p import P2POffer, P2POffers
+from ticker.models.umi_game import UmiGameRate
+from ticker.umigame import get_umi_game_data
 
 
 def get_fiat_currency_symbol(currency: FiatCurrency) -> str:
@@ -166,6 +168,20 @@ def get_umi_usdt_ton_to_rub_exchange_text(
     )
 
 
+def get_rod_bot_buy_text(umi_game_data: UmiGameRate | None) -> str:
+    if umi_game_data is None:
+        return "Нет данных"
+
+    return f"{umi_game_data.buy_tokens_rate:.2f}₽"
+
+
+def get_rod_bot_sell_text(umi_game_data: UmiGameRate | None) -> str:
+    if umi_game_data is None:
+        return "Нет данных"
+
+    return f"{umi_game_data.sell_levels_rate:.2f}₽"
+
+
 async def create_post_text(sigen: SigenExchange, cmc: CoinMarketCupExchange) -> str:
     p2p_data = await sigen.get_p2p_offers_public_list()
     sigen_exchange_data = await sigen.get_all_exchange()
@@ -177,6 +193,12 @@ async def create_post_text(sigen: SigenExchange, cmc: CoinMarketCupExchange) -> 
 
     umi_p2p_buy_text = get_umi_p2p_buy_text(p2p_data=p2p_data)
     umi_p2p_sell_text = get_umi_p2p_sell_text(p2p_data=p2p_data)
+
+    # calculate bot data
+
+    umi_game_data = await get_umi_game_data()
+    rod_bot_buy_text = get_rod_bot_buy_text(umi_game_data=umi_game_data)
+    rod_bot_sell_text = get_rod_bot_sell_text(umi_game_data=umi_game_data)
 
     # calculate exchange
 
@@ -210,9 +232,13 @@ async def create_post_text(sigen: SigenExchange, cmc: CoinMarketCupExchange) -> 
         exchange_data=sigen_exchange_data, usdt_rub_price=usdt_rub_price
     )
 
-    return f"""<b>ROD:</b>
+    return f"""<b>ROD на <a href='https://sigen.pro'>SIGEN.pro</a>:</b>
 Продать: {rod_p2p_buy_text}
 Купить: {rod_p2p_sell_text}
+
+<b>ROD в <a href='https:/t.me/UMI_Game_bot'>@UMI_Game_bot</a>:</b>
+Продать: {rod_bot_sell_text}
+Купить: {rod_bot_buy_text}
 
 <b>UMI:</b>
 Продать: {umi_p2p_buy_text}
